@@ -10,7 +10,9 @@ q2 = 1
 
 Total_no_of_time_slots = 20
 No_of_orders = [3, 3, 3, 1, 5, 3, 4, 3, 4, 2, 2, 3, 1, 1, 4, 5, 6, 6, 4, 1]
-Task_start_locs = {}
+No_of_orders = [2, 1,2]###to check with small number of order 
+Times = range(0, len(No_of_orders))
+
 
 # Other constants and variables...
 
@@ -24,13 +26,14 @@ E_Balance_Zero = {i: 111 for i in range(R)}
 Initial_deg = {0: 0.00001, 1: 0.00012, 2: 0.00005}
 
 # Define available tasks as a dictionary
-avail_tasks = {}
+avail_tasks = []
 
 # Define the task generation function
 def task_generation(k):
     tasks = []
     for i in range(No_of_orders[k]):
         # Generate task attributes
+        name = f'T{k}_{i}'
         start_loc = (random.randint(0, 9), random.randint(0, 9))  # Adjust bounds as needed
         end_loc = (random.randint(0, 9), random.randint(0, 9))  # Adjust bounds as needed
         arrival_time = k
@@ -39,6 +42,7 @@ def task_generation(k):
         
         # Create task dictionary
         task = {
+            'name': name,
             'start_loc': start_loc,
             'end_loc': end_loc,
             'arrival_time': arrival_time,
@@ -59,13 +63,16 @@ def Check_for_robots():
     # Add your implementation here
     pass
 
-# Simulate the process over time units
+# just to check the avilable tasks are appendng or not
+for k in Times:
+   new_tasks = task_generation(k)
+   avail_tasks=*avail_tasks, *new_tasks
+print(f'updated available task list: {avail_tasks}') 
 
-
 # Simulate the process over time units
-for k in range(T):
-    avail_tasks = Check_for_tasks(k)
-    print(f"Time Unit {k} - Available Tasks: {avail_tasks[k]}")
-    Check_for_robots()
+# for k in range(T):
+#     avail_tasks = Check_for_tasks(k)
+#     print(f"Time Unit {k} - Available Tasks: {avail_tasks[k]}")
+#     Check_for_robots()
     # Add more simulation steps or logic as needed
 
