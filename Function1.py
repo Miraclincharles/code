@@ -10,23 +10,23 @@ q2 = 1
 
 Total_no_of_time_slots = 20
 No_of_orders = [3, 3, 3, 1, 5, 3, 4, 3, 4, 2, 2, 3, 1, 1, 4, 5, 6, 6, 4, 1]
-No_of_orders = [2, 1,2]###to check with small number of order 
+#No_of_orders = [2, 1,2]###to check with small number of order 
 Times = range(0, len(No_of_orders))
 
 
 # Other constants and variables...
 
 # Define initial battery degradation for robots
-initial_deg = {i: 0.00001 for i in range(R)}
+initial_deg = {i: 0.00001 for i in range(R)} #{0 : 0.0001, 1: 0.00001, ...R: 0.0001}
 
 # Define initial energy balance for robots
 E_Balance_Zero = {i: 111 for i in range(R)}
 
 # Define initial degradation if you want different values for each robot
-Initial_deg = {0: 0.00001, 1: 0.00012, 2: 0.00005}
+# Initial_deg = {0: 0.00001, 1: 0.00012, 2: 0.00005}
 
 # Define available tasks as a dictionary
-avail_tasks = []
+avail_tasks = {}
 
 # Define the task generation function
 def task_generation(k):
@@ -55,8 +55,8 @@ def task_generation(k):
 # Define the Check_for_tasks function
 def Check_for_tasks(k):
     tasks_generated = task_generation(k)
-    avail_tasks[k] = tasks_generated
-    return avail_tasks
+    avail_tasks[k] = tasks_generated #{1:[], 2:[], 3:[], ....} # Updating available tasks
+    return avail_tasks # returning updated available tasks
 
 # Define the Check_for_robots function (placeholder)
 def Check_for_robots():
