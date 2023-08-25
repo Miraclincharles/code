@@ -26,7 +26,7 @@ E_Balance_Zero = {i: 111 for i in range(R)}
 # Initial_deg = {0: 0.00001, 1: 0.00012, 2: 0.00005}
 
 # Define available tasks as a dictionary
-avail_tasks = {}
+avail_tasks = []
 
 # Define the task generation function
 def task_generation(k):
@@ -66,8 +66,17 @@ def Check_for_robots():
 # just to check the avilable tasks are appendng or not
 for k in Times:
    new_tasks = task_generation(k)
-   avail_tasks=*avail_tasks, *new_tasks
+   avail_tasks=*avail_tasks, *new_tasks   ##adding new tasks in the existing avail_tasks list
 print(f'updated available task list: {avail_tasks}') 
+
+
+
+#####some operations on the avail_tasks list
+print("Element at index 0:", avail_tasks[0]) ##to see the tasks with their attributes in index 0 means the first task
+print("start loc of task in index 0:", avail_tasks[0]["start_loc"]) ## to see a particular attribute value of a particular task
+del avail_tasks[0] ## to delete a task in a particular index e.g index 0
+
+
 
 # Simulate the process over time units
 # for k in range(T):
