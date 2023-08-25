@@ -39,6 +39,9 @@ def task_generation(k):
         arrival_time = k
         deadline = arrival_time + random.randint(5, 15)
         value = random.randint(5, 30)
+        # Ensure start_loc and end_loc are not the same
+        while start_loc == end_loc:
+            end_loc = (random.randint(0, 9), random.randint(0, 9))
         
         # Create task dictionary
         task = {
