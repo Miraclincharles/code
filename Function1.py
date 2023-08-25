@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 # Define constants and variables
 R = 3
@@ -79,6 +80,14 @@ print("Element at index 0:", avail_tasks[0]) ##to see the tasks with their attri
 print("start loc of task in index 0:", avail_tasks[0]["start_loc"]) ## to see a particular attribute value of a particular task
 del avail_tasks[0] ## to delete a task in a particular index e.g index 0
 
+###example code for calculating manhattan distance between two points
+s = (2,4)
+e=(3,6)
+s = np.array(s)
+e = np.array(e)
+
+manhattan_distance = np.sum(np.abs(s-e))
+print(manhattan_distance)
 
 
 # Simulate the process over time units
