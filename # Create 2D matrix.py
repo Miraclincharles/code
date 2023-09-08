@@ -128,9 +128,11 @@ for row in matrix:
     print(row)
 ## ... (Rest of your code)
 
-# Define the allocation algorithm function
-def random_allocation(avail_robots, avail_tasks):
-    while avail_robots and avail_tasks:
+def random_allocation(avail_robots, avail_tasks, num_to_allocate):
+    allocated_robots = []
+    state_of_charge_history = {robot: [robot.state_of_charge] for robot in avail_robots}
+
+    while num_to_allocate > 0 and avail_robots and avail_tasks:
         # Randomly select a robot and a task
         selected_robot = random.choice(avail_robots)
         selected_task = random.choice(avail_tasks)
@@ -144,39 +146,25 @@ def random_allocation(avail_robots, avail_tasks):
         avail_robots.remove(selected_robot)
         avail_tasks.remove(selected_task)
 
-# Call the allocation algorithm
-random_allocation(avail_robots, avail_tasks)
+        # Add the selected robot to the list of allocated robots
+        allocated_robots.append(selected_robot)
+        num_to_allocate -= 1
 
-# Print updated lists
-print("\nUpdated Available Robots:")
-for robot in avail_robots:
-    print(robot)
+    return allocated_robots, state_of_charge_history
 
-print("\nUpdated Available Tasks:")
-for task in avail_tasks:
-    print(task)
+# Call the modified random_allocation function
+allocated_robots, state_of_charge_history = random_allocation(avail_robots, avail_tasks, len(avail_robots))
 
-# ... (Rest of your code)
-
-# Update the status of robot 0
-# Check if there are available robots before updating the status
-if avail_robots:
-    # Update the status of robot 0
-    avail_robots[0].status = "busy"
-    avail_robots[0].allocated_task = avail_tasks[0]
-    avail_robots[0].task_end_time = avail_tasks[0].total_distance_to_cover // 2
-
-    # Remove robot 0 and task 0 from their respective lists
-    del avail_robots[0]
-    del avail_tasks[0]
-
-    # Print updated lists
-    print("\nUpdated Available Robots:")
-    for robot in avail_robots:
+if allocated_robots:
+    print("Allocated Robots:")
+    for robot in allocated_robots:
         print(robot)
-
-    print("\nUpdated Available Tasks:")
-    for task in avail_tasks:
-        print(task)
 else:
     print("No available robots.")
+
+# Print the state of charge history for each robot
+for robot, soc_history in state_of_charge_history.items():
+    print(f"Robot {robot} State of Charge History:")
+    for time_unit, soc in enumerate(soc_history):
+        print(f"Time Unit {time_unit}: State of Charge = {soc}")
+
